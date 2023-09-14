@@ -1,3 +1,4 @@
+use std::fs::File;
 use std::path::Path;
 use inquire::Select;
 use crate::file_explorer::FileExplorer;
@@ -25,9 +26,23 @@ pub fn fileExplorer() {
     fn parse_command(choice: &str) {
         let root_dir = Path::new("C:\\Users\\edi");
         match choice {
-            "Get size stats of drive" => FileExplorer::display_size( FileExplorer::get_folder_size_threaded(root_dir).unwrap()),
-            &_ => todo!()
+            "List files recursively" => FileExplorer::display_size( FileExplorer::get_folder_size_threaded(root_dir).unwrap()),
+            // get first element of options
+            "Get size stats of drive" => choose_drive_to_analyze(FileExplorer::get_all_drive_letters()),
+            &_ => println!("This is still WIP!")
         }
+    }
+
+    fn choose_drive_to_analyze(driv_answer: Vec<char>) {
+        let ans = Select::new("Drives to choose from", driv_answer).prompt();
+        let mut driver = "".to_string();
+        match ans {
+            Ok(drive)  => driver = drive.to_string(),
+            Err(_) => println!("There was an error, please try again"),
+        }
+        driver = driver + ":\\";
+        let path = Path::new(&driver);
+        FileExplorer::display_size( FileExplorer::get_folder_size_threaded(path).unwrap())
     }
 }
 

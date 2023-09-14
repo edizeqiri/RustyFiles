@@ -1,9 +1,14 @@
+use std::ffi::OsStr;
+use std::os::windows::ffi::OsStrExt;
 use std::path::Path;
 use std::path::PathBuf;
 use std::thread;
 use log::debug;
 use walkdir::WalkDir;
+extern crate winapi;
 
+use winapi::um::fileapi::{GetLogicalDrives, GetDriveTypeW};
+use winapi::um::winbase::{DRIVE_FIXED, DRIVE_REMOVABLE};
 // TODO: Adjust this struct as it is trash right now
 pub struct FileExplorer {
     root_dir: PathBuf,
@@ -87,9 +92,25 @@ impl FileExplorer{
 
     pub fn get_top_folders() -> Vec<String> {
         let mut top_folders = Vec::new();
-
-
-
         top_folders
+    }
+
+    pub fn get_all_drive_letters() -> Vec<char> {
+        let mut drives = vec![];
+        unsafe {
+            let logical_drives = GetLogicalDrives();
+            if logical_drives == 0 {
+                println!("Error getting logical drives.");
+                return drives;
+            }
+
+            for drive_index in 0..26 {
+                if (logical_drives & (1 << drive_index)) != 0 {
+                    let drive_letter = (b'A' + drive_index as u8) as char;
+                    drives.push(drive_letter);
+                }
+            }
+            drives
+        }
     }
 }
