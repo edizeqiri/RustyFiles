@@ -8,6 +8,7 @@
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+## Basic Overview
 RustyFiles is a high-performance, Rust-based file explorer designed to outpace and outperform traditional file management systems like Windows Explorer. With a focus on providing detailed statistics about file and folder age, size, and utility, RustyFiles helps users effectively manage their data, prioritize cleanup, and optimize storage effortlessly.
 
 ## Features
