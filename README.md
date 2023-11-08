@@ -1,5 +1,5 @@
 
-<img src="https://github.com/edizeqiri/RustyFiles/assets/89740646/76ce2779-f0db-4f98-94c9-aa2ad7b261d7" width="400">
+<img src="https://github.com/edizeqiri/RustyFiles/assets/89740646/76ce2779-f0db-4f98-94c9-aa2ad7b261d7" width="300">
 
 # RustyFiles
 
